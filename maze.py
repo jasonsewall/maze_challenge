@@ -29,8 +29,8 @@ class rect_maze:
         self.start = None
         self.ends = []
     def dfs_maze(self, start_i, start_j):
-        self.start = [start_i, start_j]
         """Starting at start_i, start_j, remove walls to create a maze"""
+        self.start = [start_i, start_j]
         visited = ndarray((self.n, self.m), dtype=int)
         visited[:,:] = 0
         visited[start_i, start_j] = 1
