@@ -62,7 +62,6 @@ class mazeview(pyglet.window.Window):
     def on_draw(self):
         """Draw maze walls, start & ends, walker, and walker path. Flip walker upside down if solution is found."""
         self.clear()
-        self.label.draw()
         glEnable(GL_TEXTURE_2D)
         glEnable(GL_BLEND)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
