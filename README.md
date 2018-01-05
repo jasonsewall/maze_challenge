@@ -59,3 +59,7 @@ Can you write a new `walker` subclass following the `bozo_walker` example that c
   - Make the 'win condition' more visually interesting
   - Support 'camera movement' to allow for larger mazes to be displayed well.
   - 3D maze viewers!
+
+## Known issues
+
+The Windows version sometimes does strange handling of input. It's not clear to my why at this point, but I blame Pyglet.

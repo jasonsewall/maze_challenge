@@ -16,6 +16,7 @@ from maze import rect_maze, maze_walker
 from random import randint
 import sys
 import pyglet
+pyglet.options["debug_win32"] = True
 from mazeview import mazeview
 
 class bozo_walker(maze_walker):

@@ -14,6 +14,7 @@
 
 import pyglet
 from pyglet.gl import *
+pyglet.options["debug_win32"] = True
 import random
 from maze import rect_maze, maze_walker
 import sys
