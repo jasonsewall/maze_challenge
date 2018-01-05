@@ -37,6 +37,7 @@ class bozo_walker(maze_walker):
 if __name__ == '__main__':
     if len(sys.argv) < 3:
         print("Need 2 arguments!")
+        sys.exit(1)
     n = int(sys.argv[1])
     m = int(sys.argv[2])
     if len(sys.argv) == 4:
