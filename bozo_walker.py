@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from maze import rect_maze, maze_walker
-from random import randint
+import random
 import sys
 import pyglet
 ## Toggling this to 'true' seems to be important on some Windows systems
@@ -29,7 +29,7 @@ class bozo_walker(maze_walker):
         """Walk in random direaction until solved. Parent class ensures we don't walk though walls.
            Print out status every 10000 steps."""
         while not self.solved():
-            dr = 'nesw'[randint(0, 3)]
+            dr = 'nesw'[random.randint(0, 3)]
             self.move(dr)
             if len(self.path) > 0 and len(self.path) % 10000 == 0:
                 print("%d path steps so far..." % len(self.path))
