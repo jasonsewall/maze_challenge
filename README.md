@@ -1,7 +1,9 @@
 Maze Solver
 ===========
 Jason Sewall
+
 jasonsewall@gmail.com
+
 January 2018
 
 ## Quick start
