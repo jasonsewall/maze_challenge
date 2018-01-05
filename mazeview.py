@@ -1,3 +1,17 @@
+# Copyright 2018 Jason Sewall (jasonsewall@gmai.com)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import pyglet
 from pyglet.gl import *
 import random
@@ -5,10 +19,13 @@ from maze import rect_maze, maze_walker
 import sys
 
 def lerp(t, s, e):
+    """Linearly interpolate between s and e using t in [0,1]"""
     return t*(e-s) + s
 
 class mazeview(pyglet.window.Window):
-    def __init__(self, maze):
+    """A pyglet-based maze viewing application. Lets user traverse maze with a maze-walker, visualizing path."""
+    def __init__(self, maze, walker=None):
+        """Initialize window, load up textures, build vertex list. Walker can be set anytime"""
         config = pyglet.gl.Config(alpha_size=8)
         super(mazeview, self).__init__(resizable=True,caption="The Maze! (%dx%d)" % (maze.n, maze.m))
         self.maze = maze
@@ -25,10 +42,10 @@ class mazeview(pyglet.window.Window):
         self.LA.anchor_x = self.LA.width//2
         self.LA.anchor_y = self.LA.height//2
 
-        self.walker = None
-        self.label = pyglet.text.Label('Hello, world!')
+        self.walker = walker
 
     def on_key_release(self, symbol, modifiers):
+        """Use arrow keys to move walker. Walker cannot move once solution is found."""
         if self.walker == None or self.walker.solved():
             return
         if symbol == pyglet.window.key.LEFT:
@@ -41,6 +58,7 @@ class mazeview(pyglet.window.Window):
             self.walker.move('n')
 
     def on_draw(self):
+        """Draw maze walls, start & ends, walker, and walker path. Flip walker upside down if solution is found."""
         self.clear()
         self.label.draw()
         glEnable(GL_TEXTURE_2D)

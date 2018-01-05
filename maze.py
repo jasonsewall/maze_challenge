@@ -1,8 +1,23 @@
+# Copyright 2018 Jason Sewall (jasonsewall@gmai.com)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from numpy import ndarray
 from collections import defaultdict
 from random import randint
 
 class rect_maze:
+    """Represents a rectilinear maze. We use the labels 'n' 'e' 's' 'w' to identify cardinal directions."""
     def __init__(self, n, m):
         """Make a 2d n x m  'maze' with all walls in place"""
         self.n = n
@@ -58,6 +73,7 @@ class rect_maze:
         """Returns exisitence of wall west of cell pos"""
         return self.wall_x[pos[0],pos[1]]
     def get_lines(self):
+        """Produce vertices & indices to pass to batched rendering for OpenGL"""
         verts = []
         idx = 0
         lines = []
@@ -74,16 +90,21 @@ class rect_maze:
         return (verts,lines)
 
 class maze_walker:
+    """A basic path-tracking class for traversing a maze"""
     def __init__(self, maze):
+        """Set up reference to maze to be solved"""
         self.maze = maze
         self.pos = maze.start
         self.path = [self.pos]
     def solved(self):
+        """Return true if we have reached one of the ends"""
         return self.pos in self.maze.ends
     def look(self, dr):
+        """Check to see if there is a wall in this direction (one of 'n', 'e', 's', 'w')"""
         if dr in 'wnse':
             return getattr(self.maze, "wall_"+dr)(self.pos)
     def move(self, dr):
+        """Try to move in specified direction, respecting walls."""
         if not self.look(dr):
             if dr == 'w':
                 self.pos = [self.pos[0]-1, self.pos[1]]
