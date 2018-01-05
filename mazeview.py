@@ -14,7 +14,8 @@
 
 import pyglet
 from pyglet.gl import *
-pyglet.options["debug_win32"] = True
+## Toggling this to 'true' seems to be important on some Windows systems
+pyglet.options["debug_win32"] = False
 import random
 from maze import rect_maze, maze_walker
 import sys
